@@ -22,7 +22,7 @@ namespace CalculatorUsingCSharp
             int n = 18;
             int x = 12;
             int y = 80;
-            char[] btnTxt = { 'C', '1', '2', '+', '3', '4', '5', '-', '6', '7', '8', '*', '9', '0', '.', '/', '<', '=' };
+            char[] btnTxt = { '1', '2', 'C','+', '3', '4', '<', '-', '5', '6', '.', '*', '7', '8', '/', '=','9', '0' };
             for (int i = 0; i < n; i++)
             {
                 if (i % 4 == 0)
@@ -30,29 +30,37 @@ namespace CalculatorUsingCSharp
                     x = 12;
                     y = y + 70;
                 }
-                Button button1 = new Button();
-                button1.Location = new Point(x, y);
-                button1.Name = btnTxt[i].ToString();
-                button1.Size = new Size(60, 60);
-                button1.TabIndex = 1;
-                button1.Text = btnTxt[i].ToString();
-                button1.Click += btnClick;
-                button1.UseVisualStyleBackColor = true;
+                Button button1 = new Button()
+                {
+                    Location = new Point(x, y),
+                    Name = btnTxt[i].ToString(),
+                    Size = new Size(60, 60),
+                    TabIndex = 1,
+                    Text = btnTxt[i].ToString(),
+                    UseVisualStyleBackColor = true,
+                };
+                button1.Click += BtnClick;
                 this.Controls.Add(button1);
                 x = x + 90;
-
             }
         }
-        private void btnClick(object sender, EventArgs e)
+        private void BtnClick(object? sender, EventArgs e)
         {
-
-            Button clickedButton = sender as Button;
+            Button? clickedButton = sender as Button;
             if (clickedButton != null)
             {
                 char c = clickedButton.Text.ToCharArray()[0];
-                if (c >= 48 && c <= 57 || c == 46)
+                if (c >= 48 && c <= 57)
                 {
                     textBox1.Text += clickedButton.Text;
+                }
+                else if (c == 46 )
+                {
+                    int isAlready = textBox1.Text.IndexOf('.');
+                    if(isAlready == -1)
+                    {
+                        textBox1.Text += clickedButton.Text;
+                    }
                 }
                 else if (c == 'C')
                 {
@@ -71,31 +79,27 @@ namespace CalculatorUsingCSharp
                 }
                 else if (c == '=')
                 {
-                    
-                    if (optino == '+')
+                    try
                     {
                         b = Convert.ToDouble(textBox1.Text);
+                    }catch (Exception) { }
+                    if (optino == '+')
+                    {
                         result = a + b;
-                        textBox1.Text = Convert.ToString(result);
                     }
                     else if (optino == '-')
                     {
-                        b = Convert.ToDouble(textBox1.Text);
                         result = a - b;
-                        textBox1.Text = Convert.ToString(result);
                     }
                     else if (optino == '*')
                     {
-                        b = Convert.ToDouble(textBox1.Text);
                         result = a * b;
-                        textBox1.Text = Convert.ToString(result);
                     }
                     else if (optino == '/')
                     {
-                        b = Convert.ToDouble(textBox1.Text);
                         result = a / b;
-                        textBox1.Text = Convert.ToString(result);
                     }
+                    textBox1.Text = Convert.ToString(result);
                 }
                 if(textBox1.Text.Length > 0)
                 {

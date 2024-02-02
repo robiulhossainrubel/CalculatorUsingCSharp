@@ -27,13 +27,13 @@
             // 
             // textBox1
             // 
+            textBox1.Font = new Font("Microsoft Sans Serif", 22F);
             textBox1.Location = new Point(10, 12);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(332, 60);
-            textBox1.Font = new Font("Microsoft Sans Serif", 22);
-            textBox1.TabIndex = 0;
             textBox1.ReadOnly = true;
+            textBox1.Size = new Size(332, 60);
+            textBox1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -41,7 +41,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(354, 521);
             Controls.Add(textBox1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Calculator";
             Load += Form1_Load;
             ResumeLayout(false);
@@ -49,8 +52,5 @@
         }
 
         private TextBox textBox1;
-     
-
- 
     }
 }
