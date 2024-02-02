@@ -8,6 +8,7 @@ namespace CalculatorUsingCSharp
         double a;
         double b;
         char optino = '@';
+        string display = "";
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +23,7 @@ namespace CalculatorUsingCSharp
             int n = 18;
             int x = 12;
             int y = 80;
-            char[] btnTxt = { '1', '2', 'C','+', '3', '4', '<', '-', '5', '6', '.', '*', '7', '8', '/', '=','9', '0' };
+            string[] btnTxt = { "1", "2", "C","+", "3", "4", "<", "-", "5", "6", ".", "*", "7", "8", "/", "=","9", "0" };
             for (int i = 0; i < n; i++)
             {
                 if (i % 4 == 0)
@@ -33,10 +34,11 @@ namespace CalculatorUsingCSharp
                 Button button1 = new Button()
                 {
                     Location = new Point(x, y),
-                    Name = btnTxt[i].ToString(),
+                    Name = btnTxt[i],
                     Size = new Size(60, 60),
+                    Font = new Font("GenericSerif", 15),
                     TabIndex = 1,
-                    Text = btnTxt[i].ToString(),
+                    Text = btnTxt[i],
                     UseVisualStyleBackColor = true,
                 };
                 button1.Click += BtnClick;
@@ -65,6 +67,8 @@ namespace CalculatorUsingCSharp
                 else if (c == 'C')
                 {
                     textBox1.Text = "";
+                    label1.Text = "";
+                    display = "";
                     result = 0;
                     a = 0;
                     b = 0;
@@ -100,6 +104,7 @@ namespace CalculatorUsingCSharp
                         result = a / b;
                     }
                     textBox1.Text = Convert.ToString(result);
+                    label1.Text = display + b + "=";
                 }
                 if(textBox1.Text.Length > 0)
                 {
@@ -108,24 +113,32 @@ namespace CalculatorUsingCSharp
                         a = Convert.ToDouble(textBox1.Text);
                         textBox1.Text = "";
                         optino = '+';
+                        display = a+"+";
+                        label1.Text += display;
                     }
                     else if (c == '-')
                     {
                         a = Convert.ToDouble(textBox1.Text);
                         textBox1.Text = "";
                         optino = '-';
+                        display = a + "-";
+                        label1.Text += display;
                     }
                     else if (c == '*')
                     {
                         a = Convert.ToDouble(textBox1.Text);
                         textBox1.Text = "";
                         optino = '*';
+                        display = a + "*";
+                        label1.Text += display;
                     }
                     else if (c == '/')
                     {
                         a = Convert.ToDouble(textBox1.Text);
                         textBox1.Text = "";
                         optino = '/';
+                        display = a + "/";
+                        label1.Text += display;
                     }
                 }
             }
