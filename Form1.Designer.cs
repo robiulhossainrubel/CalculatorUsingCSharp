@@ -62,7 +62,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
         private TextBox textBox1;
         private Label label1;
     }
